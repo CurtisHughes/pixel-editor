@@ -1,6 +1,6 @@
 {
   "name": "@curtishughes/pixel-editor",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,6 +10,7 @@
   "author": "Curtis Hughes",
   "scripts": {
     "build": "tsc",
+    "watch": "tsc -w",
     "test": "jest --config jestconfig.json --passWithNoTests",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
