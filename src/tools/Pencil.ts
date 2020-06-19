@@ -1,6 +1,6 @@
 import { Delta, Pixel, Tool } from '../types';
 import PixelEditor from '../PixelEditor';
-import { lineAlgorithm } from '../utils';
+import { getLine } from '../utils';
 
 export default class Pencil implements Tool {
   private dragging = false;
@@ -17,7 +17,7 @@ export default class Pencil implements Tool {
 
   public handlePointerMove({ x, y }: Pixel, editor: PixelEditor) {
     if (this.dragging) {
-      const line = lineAlgorithm(this.prevPoint.x, this.prevPoint.y, x, y, this.color);
+      const line = getLine(this.prevPoint.x, this.prevPoint.y, x, y, this.color);
       editor.paint(line);
       editor.history.squash();
       this.prevPoint = { x, y };

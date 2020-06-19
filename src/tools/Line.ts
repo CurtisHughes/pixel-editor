@@ -1,6 +1,6 @@
 import { Delta, Pixel, Tool } from '../types';
 import PixelEditor from '../PixelEditor';
-import { lineAlgorithm } from '../utils';
+import { getLine } from '../utils';
 
 export default class Line implements Tool {
   private startPosition: Pixel = { x: -1, y: -1 };
@@ -22,7 +22,7 @@ export default class Line implements Tool {
 
   public handlePointerMove({ x, y }: Pixel, editor: PixelEditor) {
     if (this.dragging) {
-      const line = lineAlgorithm(this.startPosition.x, this.startPosition.y, x, y, this.color);
+      const line = getLine(this.startPosition.x, this.startPosition.y, x, y, this.color);
       editor.undo();
       editor.paint(line);
     }

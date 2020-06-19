@@ -4,7 +4,7 @@
 */
 import { Pixel } from '../types';
 
-export const lineAlgorithm = (x0: number, y0: number, x1: number, y1: number, color?: string) => {
+export const getLine = (x0: number, y0: number, x1: number, y1: number, color?: string): Pixel[] => {
   const arr: Pixel[] = [];
   const fn = (x: number, y: number) => arr.push({ x, y, color });
   const dx = x1 - x0;

@@ -1,1 +1,1 @@
-export * from './lineAlgorithm';
+export * from './getLine';
