@@ -7,7 +7,7 @@ export default class Pencil implements Tool {
 
   private prevPoint!: Pixel;
 
-  constructor(private color: string) {}
+  constructor(private color?: string) {}
 
   public handlePointerDown({ x, y }: Pixel, editor: PixelEditor) {
     this.dragging = true;
