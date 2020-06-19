@@ -1,0 +1,33 @@
+{
+  "name": "@curtishughes/pixel-editor",
+  "version": "1.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "license": "MIT",
+  "author": "Curtis Hughes",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jestconfig.json --passWithNoTests",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint && yarn format",
+    "release": "semantic-release"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "semantic-release": "^17.0.8",
+    "ts-jest": "^26.1.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

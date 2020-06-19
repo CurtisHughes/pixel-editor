@@ -1,0 +1,28 @@
+name: Merge
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.OS }}-npm-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-npm-${{ env.cache-name }}
+          ${{ runner.OS }}-npm-
+    - run: yarn
+    - run: yarn release
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
