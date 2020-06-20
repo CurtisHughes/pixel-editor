@@ -16,7 +16,3 @@ export interface Tool {
   handlePointerMove: (pos: Pixel, editor: PixelEditor) => void;
   handlePointerUp: (pos: Pixel, editor: PixelEditor) => void;
 }
-
-export interface ToolFactory {
-  getTool: () => Tool;
-}

@@ -1,6 +1,6 @@
 import History from './History';
 import PixelCollection from './PixelCollection';
-import { Pixel, ToolFactory } from './types';
+import { Pixel, Tool } from './types';
 
 export default class PixelEditor {
   private context: CanvasRenderingContext2D;
@@ -11,9 +11,9 @@ export default class PixelEditor {
 
   constructor(
     private canvas: HTMLCanvasElement,
-    public width: number,
-    public height: number,
-    public toolFactory: ToolFactory,
+    public readonly width: number,
+    public readonly height: number,
+    public tool: Tool,
     public history: History = new History(),
   ) {
     this.canvas.width = this.width;
@@ -34,12 +34,12 @@ export default class PixelEditor {
 
   private mouseup(e: MouseEvent) {
     const position = this.mousePosition(e);
-    this.toolFactory.getTool().handlePointerUp(position, this);
+    this.tool.handlePointerUp(position, this);
   }
 
   private mousedown(e: MouseEvent) {
     const position = this.mousePosition(e);
-    this.toolFactory.getTool().handlePointerDown(position, this);
+    this.tool.handlePointerDown(position, this);
     this.previousPosition = { ...position };
   }
 
@@ -47,13 +47,13 @@ export default class PixelEditor {
     const position = this.mousePosition(e);
     if (position.x !== this.previousPosition.x || position.y !== this.previousPosition.y) {
       this.previousPosition = { ...position };
-      this.toolFactory.getTool().handlePointerMove(position, this);
+      this.tool.handlePointerMove(position, this);
     }
   }
 
   private touchstart(e: TouchEvent) {
     const position = this.touchPosition(e);
-    this.toolFactory.getTool().handlePointerDown(position, this);
+    this.tool.handlePointerDown(position, this);
     this.previousPosition = { ...position };
   }
 
@@ -61,7 +61,7 @@ export default class PixelEditor {
     const position = this.touchPosition(e);
     if (position.x !== this.previousPosition.x || position.y !== this.previousPosition.y) {
       this.previousPosition = { ...position };
-      this.toolFactory.getTool().handlePointerMove(position, this);
+      this.tool.handlePointerMove(position, this);
     }
   }
 

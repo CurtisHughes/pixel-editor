@@ -2,7 +2,8 @@
 A web based pixel editor that utilizes the html canvas element to display pixels and handle user input. The goal of this package was provide a minimal interface to the canvas that would allow consumers to create their own tools and UI elements.
 
 ## Features
-* Undo/Redo
+* Configurable width and height
+* Undo/Redo/Clear
 * Mobile/Desktop event handling and pointer positions
 * Custom UI/tool compatibility
 
@@ -25,27 +26,28 @@ npm install @curtishughes/pixel-editor
 *Pixel Editor* is not coupled with any specific framework. However, I have included some examples of how it can be used with a few of the popular frontend frameworks:
 
 ### React
-```typescript
-import React, { useRef, useEffect } from 'react';
-import { PixelEditor, Pencil, ToolFactory} from '@curtishughes/pixel-editor';
+```tsx
+import React, { useRef, useEffect, useState } from 'react';
+import { PixelEditor, Pencil } from '@curtishughes/pixel-editor';
 
 function App() {
   const editorRef = useRef<HTMLCanvasElement>(null);
-
-  const pencil = new Pencil('black');
-
-  const factory: ToolFactory = {
-    getTool: () => pencil,
-  }
+  const [editor, setEditor] = useState<PixelEditor>();
 
   useEffect(() => {
     if (editorRef.current) {
-      new PixelEditor(editorRef.current, 64, 64, factory);
+      setEditor(new PixelEditor(editorRef.current, 64, 64, new Pencil('black')));
     }
-  });
+  }, []);
 
   return (
-    <canvas ref={editorRef} />
+    <>
+      <canvas ref={editorRef} />
+      <button onClick={() => { if (editor) editor.tool = new Pencil() }}>Eraser</button>
+      <button onClick={() => { if (editor) editor.tool = new Pencil('black') }}>Pencil</button>
+      <button onClick={() => { if (editor) editor.undo() }}>Undo</button>
+      <button onClick={() => { if (editor) editor.redo() }}>Redo</button>
+    </>
   );
 }
 
@@ -55,12 +57,18 @@ export default App;
 ### Vue
 ```vue
 <template>
-  <canvas ref="editor" />
+  <div>
+    <canvas ref="editor" />
+    <button @click="editor.tool = eraser">Eraser</button>
+    <button @click="editor.tool = pencil">Pencil</button>
+    <button @click="() => editor.undo()">Undo</button>
+    <button @click="() => editor.redo()">Redo</button>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { PixelEditor, ToolFactory, Pencil } from '@curtishughes/pixel-editor';
+import { PixelEditor, Pencil } from '@curtishughes/pixel-editor';
 
 @Component
 export default class Editor extends Vue {
@@ -68,15 +76,11 @@ export default class Editor extends Vue {
 
   private pencil = new Pencil('black');
 
-  private get factory(): ToolFactory {
-    return {
-      getTool: () => this.pencil,
-    };
-  }
+  private eraser = new Pencil();
 
   mounted() {
     const canvas = this.$refs.editor as HTMLCanvasElement;
-    this.editor = new PixelEditor(canvas, 64, 64, this.factory);
+    this.editor = new PixelEditor(canvas, 64, 64, this.pencil);
   }
 }
 </script>
