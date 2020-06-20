@@ -1,6 +1,13 @@
 ## Working with the code
 
-### Set up the workspace
+### Prerequisites
+
+These are the tools you will need to have installed to develop for this project:
+
+- [Node](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable)
+
+### Set up the project
 [Fork](https://guides.github.com/activities/forking/#fork) the project, [clone](https://guides.github.com/activities/forking/#clone) your fork, configure the remotes and install the dependencies:
 
 ```bash
