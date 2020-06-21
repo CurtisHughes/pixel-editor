@@ -100,3 +100,5 @@ Once implemented, a custom tool can be used by assigning the editor's `tool` pro
 ```typescript
 editor.tool = new CustomTool();
 ```
+
+Please refer to the default tool implementations for specific examples: [Pencil](src/tools/Pencil), [Rectangle](src/tools/Rectangle), [Line](src/tools/Line)
