@@ -16,7 +16,7 @@ export default class Rectangle implements Tool {
   public handlePointerDown({ x, y }: Pixel, editor: PixelEditor) {
     this.dragging = true;
     this.startPosition = { x, y };
-    editor.paint([{ x, y, color: this.color }]);
+    editor.set([{ x, y, color: this.color }]);
   }
 
   public handlePointerMove(pixel: Pixel, editor: PixelEditor) {
@@ -36,7 +36,7 @@ export default class Rectangle implements Tool {
       }
 
       editor.undo();
-      editor.paint(nextPoints);
+      editor.set(nextPoints);
     }
   }
 }

@@ -82,7 +82,17 @@ export default class PixelEditor {
     return { x, y, color };
   }
 
-  private fill(pixels: Pixel[]) {
+  public get(x: number, y: number): Pixel {
+    const color = this._pixels.get(x, y);
+    return { x, y, color };
+  }
+
+  public set(pixels: Pixel[], logToHistory: boolean = true) {
+    if (logToHistory) {
+      const prev = pixels.map(({ x, y }) => ({ x, y, color: this._pixels.get(x, y) }));
+      this.history.push({ next: pixels, prev });
+    }
+
     for (const { x, y, color } of pixels) {
       if (color) {
         this._context.fillStyle = color;
@@ -97,21 +107,15 @@ export default class PixelEditor {
   public get pixels(): Pixel[] {
     const pixels: Pixel[] = [];
     for (const { x, y } of this._pixels) {
-      pixels.push({ x, y, color: this._pixels.get(x, y) });
+      pixels.push(this.get(x, y));
     }
     return pixels;
-  }
-
-  public paint(pixels: Pixel[]) {
-    const prev = pixels.map(({ x, y }) => ({ x, y, color: this._pixels.get(x, y) }));
-    this.fill(pixels);
-    this.history.push({ next: pixels, prev });
   }
 
   public clear() {
     const prev: Pixel[] = [];
     for (const { x, y } of this._pixels) {
-      prev.push({ x, y, color: this._pixels.get(x, y) });
+      prev.push(this.get(x, y));
       this._context.clearRect(x, y, 1, 1);
     }
     this.history.push({ next: [], prev });
@@ -121,14 +125,14 @@ export default class PixelEditor {
   public undo() {
     const pixels = this.history.prev();
     if (pixels) {
-      this.fill(pixels);
+      this.set(pixels, false);
     }
   }
 
   public redo() {
     const pixels = this.history.next();
     if (pixels) {
-      this.fill(pixels);
+      this.set(pixels, false);
     }
   }
 }

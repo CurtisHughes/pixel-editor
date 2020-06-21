@@ -7,7 +7,11 @@ export default class PixelCollection {
 
   public set({ x, y, color }: Pixel) {
     const index = this.getIndex(x, y);
-    this.pixels[index] = color;
+    if (color) {
+      this.pixels[index] = color;
+    } else {
+      delete this.pixels[index];
+    }
   }
 
   public get(x: number, y: number) {
