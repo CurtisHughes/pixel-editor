@@ -34,5 +34,6 @@
   "repository": {
     "type" : "git",
     "url" : "https://github.com/CurtisHughes/pixel-editor"
-  }
+  },
+  "keywords": ["pixel art", "pixel editor", "pixel", "editor", "tools", "draw", "web", "canvas", "mobile", "browser"]
 }

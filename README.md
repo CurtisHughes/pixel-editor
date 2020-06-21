@@ -85,3 +85,18 @@ export default class Editor extends Vue {
 }
 </script>
 ```
+
+## Creating Custom Tools
+Custom tools will need to implement the `Tool` interface in order to handle user events:
+```typescript
+export interface Tool {
+  handlePointerDown: (pos: Pixel, editor: PixelEditor) => void;
+  handlePointerMove: (pos: Pixel, editor: PixelEditor) => void;
+  handlePointerUp: (pos: Pixel, editor: PixelEditor) => void;
+}
+```
+
+Once implemented, a custom tool can be used by assigning the editor's `tool` property to an instance of the custom tool:
+```typescript
+editor.tool = new CustomTool();
+```

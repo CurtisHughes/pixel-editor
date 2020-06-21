@@ -94,6 +94,14 @@ export default class PixelEditor {
     }
   }
 
+  public save(): Pixel[] {
+    const pixels: Pixel[] = [];
+    for (const { x, y } of this.pixels) {
+      pixels.push({ x, y, color: this.pixels.get(x, y) });
+    }
+    return pixels;
+  }
+
   public paint(pixels: Pixel[]) {
     const prev = pixels.map(({ x, y }) => ({ x, y, color: this.pixels.get(x, y) }));
     this.fill(pixels);
