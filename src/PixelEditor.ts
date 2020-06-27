@@ -1,11 +1,11 @@
 import History from './History';
 import PixelCollection from './PixelCollection';
-import { Pixel, Tool } from './types';
+import { Pixel, Tool, Point } from './types';
 
 export default class PixelEditor {
   private _context: CanvasRenderingContext2D;
 
-  private _previousPosition: Pixel = { x: -1, y: -1 };
+  private _previousPosition: Point = { x: -1, y: -1 };
 
   private _pixels: PixelCollection = new PixelCollection(this.width);
 
@@ -65,21 +65,19 @@ export default class PixelEditor {
     }
   }
 
-  private touchPosition(event: TouchEvent): Pixel {
+  private touchPosition(event: TouchEvent): Point {
     event.preventDefault();
     const [touch] = event.touches;
     const rect = this._canvas.getBoundingClientRect();
     const x = ((Math.round(touch.clientX - rect.left) * this._canvas.width) / this._canvas.clientWidth) | 0; // tslint:disable-line
     const y = ((Math.round(touch.clientY - rect.top) * this._canvas.height) / this._canvas.clientHeight) | 0; // tslint:disable-line
-    const color: string | undefined = this._pixels.get(x, y);
-    return { x, y, color };
+    return { x, y };
   }
 
-  private mousePosition(event: MouseEvent): Pixel {
+  private mousePosition(event: MouseEvent): Point {
     const x = ((event.offsetX * this._canvas.width) / this._canvas.clientWidth) | 0; // tslint:disable-line
     const y = ((event.offsetY * this._canvas.height) / this._canvas.clientHeight) | 0; // tslint:disable-line
-    const color: string | undefined = this._pixels.get(x, y);
-    return { x, y, color };
+    return { x, y };
   }
 
   public get(x: number, y: number): Pixel {

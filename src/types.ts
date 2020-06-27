@@ -1,8 +1,11 @@
 import PixelEditor from './PixelEditor';
 
-export type Pixel = {
+export type Point = {
   x: number;
   y: number;
+};
+
+export type Pixel = Point & {
   color?: string;
 };
 
@@ -12,7 +15,7 @@ export type Delta = {
 };
 
 export interface Tool {
-  handlePointerDown: (pos: Pixel, editor: PixelEditor) => void;
-  handlePointerMove: (pos: Pixel, editor: PixelEditor) => void;
-  handlePointerUp: (pos: Pixel, editor: PixelEditor) => void;
+  handlePointerDown: (position: Point, editor: PixelEditor) => void;
+  handlePointerMove: (position: Point, editor: PixelEditor) => void;
+  handlePointerUp: (position: Point, editor: PixelEditor) => void;
 }
