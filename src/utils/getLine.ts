@@ -4,7 +4,13 @@
 */
 import { Pixel } from '../types';
 
-export const getLine = (x0: number, y0: number, x1: number, y1: number, fn: (x: number, y: number) => Pixel = (x, y) => ({ x, y })): Pixel[] => {
+export const getLine = (
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
+  fn: (x: number, y: number) => Pixel = (x, y) => ({ x, y }),
+): Pixel[] => {
   const arr: Pixel[] = [];
   const dx = x1 - x0;
   const dy = y1 - y0;
