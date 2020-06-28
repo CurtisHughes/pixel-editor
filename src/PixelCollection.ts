@@ -1,7 +1,7 @@
-import { Pixel } from './types';
+import { Pixel, Color } from './types';
 
 export default class PixelCollection {
-  private pixels: { [i: number]: string | undefined } = {};
+  private pixels: { [i: number]: Color | undefined } = {};
 
   constructor(public width: number) {}
 

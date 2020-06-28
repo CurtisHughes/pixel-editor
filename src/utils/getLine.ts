@@ -4,9 +4,8 @@
 */
 import { Pixel } from '../types';
 
-export const getLine = (x0: number, y0: number, x1: number, y1: number, color?: string): Pixel[] => {
+export const getLine = (x0: number, y0: number, x1: number, y1: number, fn: (x: number, y: number) => Pixel = (x, y) => ({ x, y })): Pixel[] => {
   const arr: Pixel[] = [];
-  const fn = (x: number, y: number) => arr.push({ x, y, color });
   const dx = x1 - x0;
   const dy = y1 - y0;
   const adx = Math.abs(dx);
@@ -16,7 +15,7 @@ export const getLine = (x0: number, y0: number, x1: number, y1: number, color?: 
   const sy = dy > 0 ? 1 : -1;
   if (adx > ady) {
     for (let x = x0, y = y0; sx < 0 ? x >= x1 : x <= x1; x += sx) {
-      fn(x, y);
+      arr.push(fn(x, y));
       eps += ady;
       /* tslint:disable-next-line */
       if (eps << 1 >= adx) {
@@ -26,7 +25,7 @@ export const getLine = (x0: number, y0: number, x1: number, y1: number, color?: 
     }
   } else {
     for (let x = x0, y = y0; sy < 0 ? y >= y1 : y <= y1; y += sy) {
-      fn(x, y);
+      arr.push(fn(x, y));
       eps += adx;
       /* tslint:disable-next-line */
       if (eps << 1 >= ady) {

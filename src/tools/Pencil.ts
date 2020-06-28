@@ -1,30 +1,30 @@
-import { Pixel, Tool } from '../types';
+import { Tool, Color, Point } from '../types';
 import PixelEditor from '../PixelEditor';
-import { getLine } from '../utils';
+import { getLineWithColor } from '../utils';
 
 export default class Pencil implements Tool {
   private dragging = false;
 
-  private prevPoint!: Pixel;
+  private prevPosition!: Point;
 
-  constructor(private color?: string) {}
+  constructor(private color?: Color) {}
 
   public handlePointerUp() {
     this.dragging = false;
   }
 
-  public handlePointerDown({ x, y }: Pixel, editor: PixelEditor) {
+  public handlePointerDown(position: Point, editor: PixelEditor) {
     this.dragging = true;
-    this.prevPoint = { x, y };
-    editor.set([{ x, y, color: this.color }]);
+    this.prevPosition = position;
+    editor.set([{ x: position.x, y: position.y, color: this.color }]);
   }
 
-  public handlePointerMove({ x, y }: Pixel, editor: PixelEditor) {
+  public handlePointerMove(position: Point, editor: PixelEditor) {
     if (this.dragging) {
-      const line = getLine(this.prevPoint.x, this.prevPoint.y, x, y, this.color);
+      const line = getLineWithColor(this.prevPosition.x, this.prevPosition.y, position.x, position.y, this.color);
+      this.prevPosition = position;
       editor.set(line);
       editor.history.squash();
-      this.prevPoint = { x, y };
     }
   }
 }

@@ -1,27 +1,27 @@
-import { Pixel, Tool } from '../types';
+import { Tool, Color, Point } from '../types';
 import PixelEditor from '../PixelEditor';
-import { getLine } from '../utils';
+import { getLineWithColor } from '../utils';
 
 export default class Line implements Tool {
-  private startPosition: Pixel = { x: -1, y: -1 };
+  private startPosition: Point = { x: -1, y: -1 };
 
   private dragging = false;
 
-  constructor(private color?: string) {}
+  constructor(private color?: Color) {}
 
   public handlePointerUp() {
     this.dragging = false;
   }
 
-  public handlePointerDown({ x, y }: Pixel, editor: PixelEditor) {
+  public handlePointerDown(position: Point, editor: PixelEditor) {
     this.dragging = true;
-    this.startPosition = { x, y };
-    editor.set([{ x, y, color: this.color }]);
+    this.startPosition = position;
+    editor.set([{ x: position.x, y: position.y, color: this.color }]);
   }
 
-  public handlePointerMove({ x, y }: Pixel, editor: PixelEditor) {
+  public handlePointerMove(position: Point, editor: PixelEditor) {
     if (this.dragging) {
-      const line = getLine(this.startPosition.x, this.startPosition.y, x, y, this.color);
+      const line = getLineWithColor(this.startPosition.x, this.startPosition.y, position.x, position.y, this.color);
       editor.undo();
       editor.set(line);
     }

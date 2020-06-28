@@ -1,12 +1,14 @@
 import PixelEditor from './PixelEditor';
 
+export type Color = string;
+
 export type Point = {
   x: number;
   y: number;
 };
 
 export type Pixel = Point & {
-  color?: string;
+  color?: Color;
 };
 
 export type Delta = {

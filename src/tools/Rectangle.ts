@@ -1,42 +1,41 @@
 import PixelEditor from '../PixelEditor';
-import { Pixel, Tool } from '../types';
+import { Pixel, Tool, Color, Point } from '../types';
 
 export default class Rectangle implements Tool {
-  private startPosition: Pixel = { x: -1, y: -1 };
+  private startPosition!: Point;
 
   private dragging = false;
 
-  constructor(private color: string) {}
+  constructor(private color: Color) {}
 
   public handlePointerUp() {
     this.dragging = false;
-    this.startPosition = { x: -1, y: -1 };
   }
 
-  public handlePointerDown({ x, y }: Pixel, editor: PixelEditor) {
+  public handlePointerDown(position: Point, editor: PixelEditor) {
     this.dragging = true;
-    this.startPosition = { x, y };
-    editor.set([{ x, y, color: this.color }]);
+    this.startPosition = position;
+    editor.set([{ x: position.x, y: position.y, color: this.color }]);
   }
 
-  public handlePointerMove(pixel: Pixel, editor: PixelEditor) {
+  public handlePointerMove(position: Point, editor: PixelEditor) {
     if (this.dragging) {
-      const xStart = Math.min(pixel.x, this.startPosition.x);
-      const yStart = Math.min(pixel.y, this.startPosition.y);
-      const xEnd = Math.max(pixel.x, this.startPosition.x);
-      const yEnd = Math.max(pixel.y, this.startPosition.y);
-      const nextPoints: Pixel[] = [];
+      const xStart = Math.min(position.x, this.startPosition.x);
+      const yStart = Math.min(position.y, this.startPosition.y);
+      const xEnd = Math.max(position.x, this.startPosition.x);
+      const yEnd = Math.max(position.y, this.startPosition.y);
+      const pixels: Pixel[] = [];
 
       for (let y = yStart; y <= yEnd; y += 1) {
         for (let x = xStart; x <= xEnd; x += 1) {
           if (x === xStart || x === xEnd || y === yStart || y === yEnd) {
-            nextPoints.push({ x, y, color: this.color });
+            pixels.push({ x, y, color: this.color });
           }
         }
       }
 
       editor.undo();
-      editor.set(nextPoints);
+      editor.set(pixels);
     }
   }
 }

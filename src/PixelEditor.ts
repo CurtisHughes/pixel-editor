@@ -87,7 +87,7 @@ export default class PixelEditor {
 
   public set(pixels: Pixel[], logToHistory: boolean = true) {
     if (logToHistory) {
-      const prev = pixels.map(({ x, y }) => ({ x, y, color: this._pixels.get(x, y) }));
+      const prev = pixels.map(({ x, y }) => this.get(x, y));
       this.history.push({ next: pixels, prev });
     }
 
