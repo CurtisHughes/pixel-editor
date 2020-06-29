@@ -19,7 +19,10 @@
     "release": "semantic-release"
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
     "@types/jest": "^26.0.0",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
     "semantic-release": "^17.0.8",
@@ -32,8 +35,19 @@
     "access": "public"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/CurtisHughes/pixel-editor"
+    "type": "git",
+    "url": "https://github.com/CurtisHughes/pixel-editor"
   },
-  "keywords": ["pixel art", "pixel editor", "pixel", "editor", "tools", "draw", "web", "canvas", "mobile", "browser"]
+  "keywords": [
+    "pixel art",
+    "pixel editor",
+    "pixel",
+    "editor",
+    "tools",
+    "draw",
+    "web",
+    "canvas",
+    "mobile",
+    "browser"
+  ]
 }
