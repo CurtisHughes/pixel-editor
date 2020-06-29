@@ -94,7 +94,7 @@ export default class PixelEditor {
       } else {
         this._context.clearRect(x, y, 1, 1);
       }
-      prev.push(({ x, y, color: this._pixels.get(x, y) }));
+      prev.push({ x, y, color: this._pixels.get(x, y) });
       this._pixels.set({ x, y, color });
     }
     if (logToHistory) {
