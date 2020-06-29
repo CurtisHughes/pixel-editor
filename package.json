@@ -12,10 +12,10 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest --config jestconfig.json --passWithNoTests",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint --fix --project tsconfig.json",
+    "format": "prettier --check \"**/*.{ts,json}\"",
+    "lint": "tslint --project tsconfig.json",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn test && yarn lint && yarn format",
+    "prepublishOnly": "yarn lint && yarn format && yarn test",
     "release": "semantic-release",
     "commit": "commit"
   },

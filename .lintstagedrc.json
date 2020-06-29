@@ -1,3 +1,4 @@
 {
-  "*.ts": ["yarn format", "yarn lint"]
+  "*.ts": ["tslint --fix", "prettier --write"],
+  "*.json": ["prettier --write"]
 }
