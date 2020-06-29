@@ -127,3 +127,9 @@ The rest of the commit message is then used for this.
 | `fix(pencil): stop graphite breaking when too much pressure applied`                                                                                                                             | Patch Release              |
 | `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | ~~Minor~~ Feature Release  |
 | `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | ~~Major~~ Breaking Release |
+
+### Helpful tools
+You can run the following command to use the commitlint [prompt-cli](https://commitlint.js.org/#/guides-use-prompt) to easily create a valid commit:
+```
+yarn commit
+```

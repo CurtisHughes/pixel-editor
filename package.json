@@ -16,11 +16,13 @@
     "lint": "tslint -p tsconfig.json",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && yarn lint && yarn format",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "commit": "commit"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
+    "@commitlint/prompt-cli": "^9.0.1",
     "@types/jest": "^26.0.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
