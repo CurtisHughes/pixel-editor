@@ -86,11 +86,7 @@ export default class PixelEditor {
   }
 
   public set(pixels: Pixel[], logToHistory: boolean = true) {
-    if (logToHistory) {
-      const prev = pixels.map(({ x, y }) => this.get(x, y));
-      this.history.push({ next: pixels, prev });
-    }
-
+    const prev: Pixel[] = [];
     for (const { x, y, color } of pixels) {
       if (color) {
         this._context.fillStyle = color;
@@ -98,7 +94,11 @@ export default class PixelEditor {
       } else {
         this._context.clearRect(x, y, 1, 1);
       }
+      prev.push(({ x, y, color: this._pixels.get(x, y) }));
       this._pixels.set({ x, y, color });
+    }
+    if (logToHistory) {
+      this.history.push({ next: pixels, prev });
     }
   }
 
@@ -111,12 +111,8 @@ export default class PixelEditor {
   }
 
   public clear() {
-    const prev: Pixel[] = [];
-    for (const { x, y } of this._pixels) {
-      prev.push(this.get(x, y));
-      this._context.clearRect(x, y, 1, 1);
-    }
-    this.history.push({ next: [], prev });
+    this._context.clearRect(0, 0, this.width, this.height);
+    this.history.push({ next: [], prev: this.pixels });
     this._pixels = new PixelCollection(this.width);
   }
 
