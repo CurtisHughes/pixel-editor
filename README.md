@@ -23,6 +23,8 @@ npm install @curtishughes/pixel-editor
 ```
 
 ## Usage
+The PixelEditor [api documentation](./docs/PixelEditor.md) can be found within the docs folder of this repository.
+
 *Pixel Editor* is not coupled with any specific framework. However, I have included some examples of how it can be used with a few of the popular frontend frameworks:
 
 ### React
