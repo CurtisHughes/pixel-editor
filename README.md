@@ -1,5 +1,5 @@
 # Pixel Editor
-A web based pixel editor that utilizes the html canvas element to display pixels and handle user input. The goal of this package was provide a minimal interface to the canvas that would allow consumers to create their own tools and UI elements.
+A web based pixel editor that utilizes the html canvas element to display pixels and handle user input. The goal of this package was to provide a minimal interface to the canvas that would allow consumers to create their own tools and UI elements.
 
 ## Features
 * Configurable width and height
@@ -103,4 +103,7 @@ Once implemented, a custom tool can be used by assigning the editor's `tool` pro
 editor.tool = new CustomTool();
 ```
 
-Please refer to the default tool implementations for specific examples: [Pencil](src/tools/Pencil), [Rectangle](src/tools/Rectangle), [Line](src/tools/Line)
+Please refer to the default tool implementations for specific examples: [Pencil](src/tools/Pencil.ts), [Rectangle](./src/tools/Rectangle.ts), [Line](./src/tools/Line.ts)
+
+## Example
+<img width="300px" src="./assets/clock.png" />
