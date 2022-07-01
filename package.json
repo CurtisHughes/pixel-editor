@@ -54,5 +54,8 @@
     "canvas",
     "mobile",
     "browser"
-  ]
+  ],
+  "engines": {
+    "node": ">=14.19.3 <15"
+  }
 }
