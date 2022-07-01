@@ -29,7 +29,7 @@
     "jest": "^26.0.1",
     "lint-staged": ">=10",
     "prettier": "^2.0.5",
-    "semantic-release": "^17.2.3",
+    "semantic-release": "^19.0.3",
     "ts-jest": "^26.1.0",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
@@ -54,5 +54,8 @@
     "canvas",
     "mobile",
     "browser"
-  ]
+  ],
+  "engines": {
+    "node": ">=14.19.3 <15"
+  }
 }
